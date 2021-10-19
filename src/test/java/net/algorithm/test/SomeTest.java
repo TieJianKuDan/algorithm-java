@@ -75,4 +75,11 @@ public class SomeTest {
     public void test5() {
         System.out.println(fun(13));
     }
+
+    @Test
+    public void test6() {
+        String str = "a";
+        System.out.println(str.substring(1, 1));
+    }
+
 }

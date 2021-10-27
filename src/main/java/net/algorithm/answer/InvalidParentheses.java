@@ -4,10 +4,12 @@ import java.util.*;
 
 public class InvalidParentheses {
     public static void main(String[] args) {
-        String s = "((()";
+        String s = "(a)())()";
         InvalidParentheses self = new InvalidParentheses();
         System.out.println(self.removeInvalidParentheses(s));
     }
+
+    private Set<String> rem = new HashSet<>();
 
     public List<String> removeInvalidParentheses(String s) {
         Set<String> set = new HashSet<>();
@@ -16,7 +18,7 @@ public class InvalidParentheses {
             return new ArrayList<>(set);
         }
         HashMap<String, Integer> res = new HashMap<>();
-        dfs(s.toCharArray(), res, s.length(), s.length());
+        dfs(s, res, s.length(), s.length());
         Set<Map.Entry<String, Integer>> entries = res.entrySet();
         int minStep = s.length();
         for (Map.Entry<String, Integer> entry : entries) {
@@ -25,13 +27,7 @@ public class InvalidParentheses {
         int step = minStep;
         res.forEach((key, value) -> {
             if (value <= step) {
-                StringBuilder builder = new StringBuilder();
-                for (int i = 0; i < key.length(); i++) {
-                    if (key.charAt(i) != ' ') {
-                        builder.append(s.charAt(i));
-                    }
-                }
-                set.add(builder.toString());
+                set.add(key);
             }
         });
         return new ArrayList<>(set);
@@ -44,28 +40,29 @@ public class InvalidParentheses {
      * @param res
      * @param minStep
      */
-    private int dfs(char[] s, Map<String, Integer> res, int minStep, int restStep) {
+    private int dfs(String s, Map<String, Integer> res, int minStep, int restStep) {
         if (restStep <= 0) {
             return minStep;
         }
-        for (int i = 0; i < s.length; i++) {
-            if (s[i] == '(' || s[i] == ')') {
-                char temp = s[i];
-                s[i] = ' ';
+        if (rem.contains(s)) {
+            return minStep;
+        }
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == '(' || s.charAt(i) == ')') {
                 restStep--;
-                String candidate = new String(s);
+                String candidate = s.substring(0, i) + s.substring(i + 1, s.length());
                 if (isLegal(candidate)) {
                     int spend = minStep - restStep;
                     minStep = Math.min(minStep - restStep, minStep);
                     restStep = Math.min(restStep, minStep - spend);
                     res.put(candidate, minStep);
                 } else {
-                    dfs(s, res, minStep, restStep);
+                    dfs(candidate, res, minStep, restStep);
                 }
                 restStep++;
-                s[i] = temp;
             }
         }
+        rem.add(s);
         return minStep;
     }
 

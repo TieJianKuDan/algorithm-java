@@ -1,5 +1,7 @@
 package net.algorithm.test;
 
+import net.algorithm.answer.MapSum;
+import net.algorithm.pojo.Person;
 import org.junit.Test;
 
 import java.sql.DriverManager;
@@ -82,4 +84,21 @@ public class SomeTest {
         System.out.println(str.substring(1, 1));
     }
 
+    @Test
+    public void test7() {
+        MapSum mapSum = new MapSum();
+        mapSum.insert("apple", 3);
+        mapSum.sum("ap");
+    }
+
+    @Test
+    public void test8() {
+        Person[] people = new Person[3];
+        Person person = people[1];
+        System.out.println(person == people[1]);
+        person = new Person(1, "leo");
+        System.out.println(person);
+        System.out.println(people[1]);
+        return;
+    }
 }

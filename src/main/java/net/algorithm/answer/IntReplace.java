@@ -12,6 +12,11 @@ public class IntReplace {
         System.out.println(self.integerReplacementR(2147483647));
     }
 
+    /**
+     * 超出内存限制
+     * @param n
+     * @return
+     */
     public int integerReplacement(int n) {
         int[] dp = new int[n + 1];
         dp[1] = 0;

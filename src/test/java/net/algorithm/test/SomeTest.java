@@ -7,6 +7,7 @@ import org.junit.Test;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.PriorityQueue;
 import java.util.Set;
 
@@ -100,5 +101,22 @@ public class SomeTest {
         System.out.println(person);
         System.out.println(people[1]);
         return;
+    }
+
+    @Test
+    public void test9() {
+        PriorityQueue<Integer> queue = new PriorityQueue<>();
+        queue.offer(2);
+        queue.offer(3);
+        queue.offer(5);
+        queue.offer(1);
+        Iterator<Integer> iterator = queue.iterator();
+        while (iterator.hasNext()) {
+            Integer next = iterator.next();
+            if (next == 2) {
+                iterator.remove();
+            }
+        }
+        System.out.println(queue);
     }
 }

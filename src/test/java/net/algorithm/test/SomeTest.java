@@ -6,10 +6,9 @@ import org.junit.Test;
 
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.PriorityQueue;
-import java.util.Set;
+import java.util.*;
+
+import static java.util.Arrays.sort;
 
 public class SomeTest {
     @Test
@@ -118,5 +117,26 @@ public class SomeTest {
             }
         }
         System.out.println(queue);
+    }
+
+    @Test
+    public void test10() {
+        ArrayList<Person> list = new ArrayList<>(1);
+        Person p = new Person(1, "leo");
+        list.add(p);
+        list.get(0).setId(2);
+        System.out.println(p);
+    }
+
+    @Test
+    public void test11() {
+        Integer[] arr = new Integer[2];
+        Arrays.sort(arr, 1, 2, new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                // TODO Auto-generated method stub
+                return 0;
+            }
+        });
     }
 }
